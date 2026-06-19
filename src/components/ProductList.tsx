@@ -8,7 +8,9 @@ const ProductList = () => {
 
   return (
     <div>
-      <h2>Products</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        Products
+      </h2>
 
       {products.map((product) => (
         <ProductCard
