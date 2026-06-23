@@ -10,13 +10,11 @@ const Home = () => {
       </h1>
 
       <div className="text-center mb-8">
-        <h3 className="text-xl font-semibold mb-3">
-          Special Offers
-        </h3>
+        <h2 className="text-2xl font-bold mb-4">Special Offers</h2>
 
-        <p>🍎 Apple: Buy 3 Get 1 Free</p>
-        <p>🍊 Orange: 10% Off on 2 or More</p>
-        <p>🍌 Banana: Buy 5 Pay For 4</p>
+        <p>🧀 Cheese: Buy 1 Get 1 Free</p>
+        <p>🥫 Soup: Bread at 50% Off</p>
+        <p>🧈 Butter: 1/3 Off</p>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-5 items-start">

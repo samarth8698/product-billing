@@ -11,16 +11,16 @@ const ProductCard = ({ product }: Props) => {
 
   return (
     <div className="flex items-center justify-between border-b border-gray-300 py-4">
-      <span className="font-medium">{product.name}</span>
+      <span className="font-medium">
+        {product.name}
+      </span>
 
       <span className="font-medium">
-        ₹{product.price}
+        £{product.price.toFixed(2)}
       </span>
 
       <button
-        onClick={() =>
-          dispatch(increment(product.id))
-        }
+        onClick={() => dispatch(increment(product.id))}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
       >
         Add

@@ -10,39 +10,50 @@ const BillSummary = () => {
     0
   );
 
-  const apple = products.find(
-    (item) => item.name === "Apple"
+  const bread = products.find(
+    (item) => item.name === "Bread"
   );
 
-  const orange = products.find(
-    (item) => item.name === "Orange"
+  const cheese = products.find(
+    (item) => item.name === "Cheese"
   );
 
-  const banana = products.find(
-    (item) => item.name === "Banana"
+  const soup = products.find(
+    (item) => item.name === "Soup"
   );
 
-  const appleSaving = apple
-    ? Math.floor(apple.quantity / 4) *
-      apple.price
+  const butter = products.find(
+    (item) => item.name === "Butter"
+  );
+
+  // Cheese Buy 1 Get 1 Free
+  const cheeseSaving = cheese
+    ? Math.floor(cheese.quantity / 2) *
+      cheese.price
     : 0;
 
-  const orangeSaving =
-    orange && orange.quantity >= 2
-      ? orange.quantity *
-        orange.price *
-        0.1
+  // Soup gives Bread at 50% Off
+  const breadSaving =
+    soup && bread
+      ? Math.min(
+          soup.quantity,
+          bread.quantity
+        ) *
+        bread.price *
+        0.5
       : 0;
 
-  const bananaSaving = banana
-    ? Math.floor(banana.quantity / 5) *
-      banana.price
+  // Butter 1/3 Off
+  const butterSaving = butter
+    ? butter.quantity *
+      butter.price *
+      (1 / 3)
     : 0;
 
   const totalSavings =
-    appleSaving +
-    orangeSaving +
-    bananaSaving;
+    cheeseSaving +
+    breadSaving +
+    butterSaving;
 
   const finalTotal =
     subtotal - totalSavings;
@@ -56,17 +67,38 @@ const BillSummary = () => {
       <hr className="my-4 border-gray-300" />
 
       <p className="mb-2">
-        <strong>Sub Total:</strong> ₹
+        <strong>Sub Total:</strong> £
         {subtotal.toFixed(2)}
       </p>
 
+      {cheeseSaving > 0 && (
+        <p className="mb-1 text-red-500">
+          Cheese Saving: £
+          {cheeseSaving.toFixed(2)}
+        </p>
+      )}
+
+      {breadSaving > 0 && (
+        <p className="mb-1 text-red-500">
+          Bread Saving: £
+          {breadSaving.toFixed(2)}
+        </p>
+      )}
+
+      {butterSaving > 0 && (
+        <p className="mb-1 text-red-500">
+          Butter Saving: £
+          {butterSaving.toFixed(2)}
+        </p>
+      )}
+
       <p className="mb-2 text-red-500">
-        <strong>Savings:</strong> ₹
+        <strong>Savings:</strong> £
         {totalSavings.toFixed(2)}
       </p>
 
       <p className="text-lg font-bold text-green-600">
-        Total Amount: ₹
+        Total Amount: £
         {finalTotal.toFixed(2)}
       </p>
     </div>

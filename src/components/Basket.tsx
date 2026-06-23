@@ -16,6 +16,24 @@ const Basket = () => {
     (item) => item.quantity > 0
   );
 
+  const bread = products.find(
+    (item) => item.name === "Bread"
+  );
+
+  const soup = products.find(
+    (item) => item.name === "Soup"
+  );
+
+  const breadSaving =
+    soup && bread
+      ? Math.min(
+          soup.quantity,
+          bread.quantity
+        ) *
+        bread.price *
+        0.5
+      : 0;
+
   return (
     <div className="flex-1 bg-gray-100 p-5 rounded-lg shadow">
       <h2 className="text-2xl font-bold mb-5">
@@ -28,23 +46,24 @@ const Basket = () => {
 
         let saving = 0;
 
-        if (item.name === "Apple") {
+        if (item.name === "Cheese") {
           saving =
-            Math.floor(item.quantity / 4) *
+            Math.floor(item.quantity / 2) *
             item.price;
+        }
+
+        if (item.name === "Butter") {
+          saving =
+            item.quantity *
+            item.price *
+            (1 / 3);
         }
 
         if (
-          item.name === "Orange" &&
-          item.quantity >= 2
+          item.name === "Bread" &&
+          breadSaving > 0
         ) {
-          saving = itemPrice * 0.1;
-        }
-
-        if (item.name === "Banana") {
-          saving =
-            Math.floor(item.quantity / 5) *
-            item.price;
+          saving = breadSaving;
         }
 
         const itemCost =
@@ -58,19 +77,21 @@ const Basket = () => {
             <div className="flex justify-between items-center mb-3">
               <strong>{item.name}</strong>
 
-              <span>₹{item.price}</span>
+              <span>
+                £{item.price.toFixed(2)}
+              </span>
 
               <div className="flex items-center gap-2">
                 <button
                   onClick={() =>
                     dispatch(decrement(item.id))
                   }
-                  className="bg-blue-500 text-white w-8 h-8 rounded hover:bg-blue-600 transition"
+                  className="bg-blue-500 text-white w-8 h-8 rounded hover:bg-blue-600"
                 >
                   -
                 </button>
 
-                <span className="font-medium">
+                <span>
                   {item.quantity}
                 </span>
 
@@ -78,7 +99,7 @@ const Basket = () => {
                   onClick={() =>
                     dispatch(increment(item.id))
                   }
-                  className="bg-blue-500 text-white w-8 h-8 rounded hover:bg-blue-600 transition"
+                  className="bg-blue-500 text-white w-8 h-8 rounded hover:bg-blue-600"
                 >
                   +
                 </button>
@@ -86,19 +107,19 @@ const Basket = () => {
             </div>
 
             <p>
-              Item Price: ₹
+              Item Price: £
               {itemPrice.toFixed(2)}
             </p>
 
             {saving > 0 && (
               <p className="text-red-500 mt-2">
-                Savings ₹
+                Savings £
                 {saving.toFixed(2)}
               </p>
             )}
 
             <p className="mt-2">
-              Item Cost ₹
+              Item Cost £
               {itemCost.toFixed(2)}
             </p>
           </div>
